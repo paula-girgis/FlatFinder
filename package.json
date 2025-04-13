@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",              // ✅ Needed for local dev
-    "vercel-start": "node index.js"        // ✅ Needed for Vercel
+    "start": "node index.js",
+    "vercel-start": "node index.js"
   },
   "keywords": [],
   "author": "",
