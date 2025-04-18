@@ -1,19 +1,26 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import serverless from 'serverless-http';
-import { connectDB } from '../DB/connection.js';
-import { appRouter } from '../src/app.router.js';
+import { appRouter } from './src/app.router.js';
+import { connectDB } from './DB/connection.js';
 
 dotenv.config();
 
 const app = express();
 
-// Connect to DB
-connectDB();
+// Async initialization
+const startServer = async () => {
+  try {
+    await connectDB(); // Wait for DB to connect before using app
+    appRouter(app, express);
 
-// Apply appRouter middleware (your routes, body parsers, etc.)
-appRouter(app, express);
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`🚀 Server is running on http://localhost:${port}`);
+    });
+  } catch (err) {
+    console.error('❌ Failed to connect to DB:', err);
+    process.exit(1); // Exit with failure code
+  }
+};
 
-// Export as Vercel serverless function
-export const handler = serverless(app);
-export default handler;
+startServer();
