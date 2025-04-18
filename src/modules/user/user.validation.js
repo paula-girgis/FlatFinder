@@ -54,7 +54,7 @@ export const resetPassSchema = joi.object({
         .email()
         .required(),
     forgetCode: joi.string()
-        .length(6)
+        .length(5)
         .pattern(/^\d+$/)
         .message("Reset code must be a 6-digit number")
         .required(),
