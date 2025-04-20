@@ -1,4 +1,4 @@
-// User Schema
+
 import mongoose, { Schema, model } from 'mongoose'
 import { Types } from 'mongoose'
 
@@ -53,5 +53,5 @@ const userSchema = new Schema({
         type: String
     }
 }, { timestamps: true });
-// Models
+
 export const User = mongoose.models.User || model('User',userSchema);
