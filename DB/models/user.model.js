@@ -15,10 +15,7 @@ const userSchema = new Schema({
         minLength: 3,
         maxLength: 50
     },
-    phoneNo: {
-        type: String,
-        required: false,
-    },
+ 
     universityName: {
         type: String
     },
