@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 import Randomstring from 'randomstring';
 
 export const register = asyncHandler(async (req, res, next) => {
-    const { name, email, password, phoneNo, universityName, role, gender } = req.body;
+    const { FirstName,LastName, email, password, role } = req.body;
     const isUser = await User.findOne({ email });
     if (isUser) return next(new Error("Email already exists!"), { cause: 409 });
 
@@ -17,13 +17,11 @@ export const register = asyncHandler(async (req, res, next) => {
     const activationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     const user = await User.create({
-        name,
+        FirstName,
+        LastName,
         email,
         password: hashedPassword,
-        phoneNo,
-        universityName,
         role,
-        gender,
         activationCode
     });
 
