@@ -48,8 +48,8 @@ export const GetMessage = async (req, res) => {
       ]
     })
       .sort({ timestamp: 1 })
-      .populate('sender', 'name')
-      .populate('receiver', 'name')
+      .populate('sender', 'FirstName')
+      .populate('receiver', 'FirstName')
       .select('content timestamp read sender receiver');
 
     // Update unread messages to read
@@ -63,8 +63,8 @@ export const GetMessage = async (req, res) => {
     );
 
     const responseMessages = messages.map(message => ({
-      senderName: message.sender.name,
-      receiverName: message.receiver.name,
+      senderName: message.sender.FirstName,
+      receiverName: message.receiver.FirstName,
       content: message.content,
       timestamp: message.timestamp,
       status: message.read ? 'read' : 'unread'
@@ -136,7 +136,7 @@ export const GetChatsOverview = async (req, res) => {
       {
         $project: {
           userId: '$_id',
-          name: '$user.name',
+          name: '$user.FirstName',
           lastMessage: 1,
           timestamp: 1,
           status: {
