@@ -3,7 +3,13 @@ import mongoose, { Schema, model } from 'mongoose'
 import { Types } from 'mongoose'
 
 const userSchema = new Schema({
-    name: {
+    FirstName: {
+        type: String,
+        required: true,
+        minLength: 3,
+        maxLength: 50
+    },
+    LastName: {
         type: String,
         required: true,
         minLength: 3,
@@ -11,8 +17,7 @@ const userSchema = new Schema({
     },
     phoneNo: {
         type: String,
-        required: true,
-        unique: true
+        required: false,
     },
     universityName: {
         type: String
@@ -35,7 +40,7 @@ const userSchema = new Schema({
     gender: {
         type: String,
         enum: ['male', 'female'],
-        required: true
+        required: false
     },
     isConfirmed: {
         type: Boolean,
