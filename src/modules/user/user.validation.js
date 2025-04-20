@@ -2,25 +2,27 @@ import joi from 'joi';
 
 // Register Schema
 export const registerSchema = joi.object({
-    userName: joi.string()
+    FirstName: joi.string()
         .alphanum()
         .min(3)
-        .max(20)
+        .max(50)
+        .required(),
+    LastName: joi.string()
+        .alphanum()
+        .min(3)
+        .max(50)
         .required(),
     email: joi.string()
         .email()
         .required(),
-        password: joi.string()
+    password: joi.string()
         .min(8)
         .max(32)
         .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&]).{8,32}$/)
         .message("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%?&)")
         .required(),
     
-    confirmPassword: joi.string()
-        .valid(joi.ref("password"))
-        .required()
-        .messages({ "any.only": "Passwords must match" })
+    
 }).required();
 
 // Activate Account Schema
