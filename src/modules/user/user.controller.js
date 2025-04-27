@@ -11,8 +11,11 @@ import Randomstring from 'randomstring';
 export const register = asyncHandler(async (req, res, next) => {
     const { FirstName,LastName, email, password, role } = req.body;
     const isUser = await User.findOne({ email });
-    if (isUser) return next(new Error("Email already exists!"), { cause: 409 });
-
+if (isUser) {
+    const error = new Error("Email already exists!");
+    error.statusCode = 409;
+    return next(error);
+}
     const hashedPassword = bcryptjs.hashSync(password, Number(process.env.SALT_ROUND));
     const activationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
