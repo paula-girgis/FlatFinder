@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors'; // <<== 1. Import cors
+import cors from 'cors'; 
 import { appRouter } from './src/app.router.js';
 import { connectDB } from './DB/connection.js';
 
@@ -11,8 +11,8 @@ const app = express();
 // 2. Use cors middleware (allow all origins)
 app.use(cors({
   origin: '*', // Allow requests from any domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // You can also customize allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Customize headers if needed
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
 }));
 
 // Async initialization
